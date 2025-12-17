@@ -23,14 +23,14 @@ export const registerUser = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, salt);
 
     const otp = generateOTP();
-    const otpExpiry = Date.now() + 10 * 60 * 1000;
+    const otpExpires = Date.now() + 10 * 60 * 1000;
 
     const newUser = new User({
       name,
       email,
       password: hashedPassword,
       otp: otp,
-      otpExpiry: otpExpiry,
+      otpExpires: otpExpires,
     });
     await newUser.save();
 
